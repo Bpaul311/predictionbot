@@ -1,5 +1,4 @@
 import csv
-
 # Load odds data
 with open('output.csv', mode='r') as odds_file:
     odds_reader = csv.DictReader(odds_file)
@@ -46,7 +45,7 @@ for game_no in range(1, 11):  # Assuming there are 10 games
     combined_data.append(combined_match)
 
 # Save the combined data to a new CSV file
-with open('combined_data.csv', mode='w', newline='') as combined_file:
+with open('combined_data.csv', mode='a', newline='') as combined_file:
     fieldnames = ['game_no', 'Home_team', 'Away_team', 'half_time_score',
                   'home_score', 'away_score', 'home_odds', 'draw_odds', 'away_odds']
     writer = csv.DictWriter(combined_file, fieldnames=fieldnames)
