@@ -10,10 +10,10 @@ log_file_path = "webdriver.log"
 driver = configure_edge_driver(log_file_path)
 try:
     # Navigate to the URL to get live scores
-    driver.get('https://www.betpawa.rw/virtual-sports?virtualTab=live')
+    driver.get('https://www.betpawa.rw/virtual-sports/matchday/9800/352887')
 
     # Wait for the page to load
-    WebDriverWait(driver, 65).until(
+    WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, '//h3[@class="title"]'))
     )
 
@@ -30,7 +30,7 @@ try:
     live_scores = [score.text for score in score_elements]
 
     # Open a CSV file for writing
-    with open('training_set.csv', mode='a', newline='') as file:
+    with open('training_set.csv', mode='w', newline='') as file:
         writer = csv.writer(file)
 
         # Write the header row

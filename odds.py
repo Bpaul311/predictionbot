@@ -25,7 +25,7 @@ try:
     odds = [odds_element.text for odds_element in odds_elements]
 
     # Loop to get the odds
-    with open('output.csv', mode='a', newline='') as file:
+    with open('output.csv', mode='w', newline='') as file:
         writer = csv.writer(file)
         # Write the header row
         writer.writerow(['game_no', 'home_odds', 'draw_odds', 'away_odds'])
