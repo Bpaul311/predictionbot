@@ -12,8 +12,7 @@ data = pd.read_csv('combined_data.csv')
 filtered_data = data[data['home_odds'] >= 1.99]
 
 # replace 'x' with '0' and convert to int
-filtered_data.loc[filtered_data['outcome'] == 'x', 'outcome'] = '0'
-filtered_data['outcome'] = filtered_data['outcome'].astype(int)
+filtered_data.loc[filtered_data['outcome'] == 'x', 'outcome'] = 0
 
 # Split the data into features (X) and target (y)
 x = filtered_data.drop(['game_id', 'Home_team', 'Away_team', 'home_score', 'away_score',
