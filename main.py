@@ -10,7 +10,8 @@ log_file_path = "webdriver.log"
 driver = configure_edge_driver(log_file_path)
 try:
     # Navigate to the URL to get live scores
-    driver.get('https://www.betpawa.rw/virtual-sports/matchday/9800/352887')
+    driver.get(
+        'https://www.betpawa.rw/virtual-sports/matchday/9843/354374')
 
     # Wait for the page to load
     WebDriverWait(driver, 10).until(

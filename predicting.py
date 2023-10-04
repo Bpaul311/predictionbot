@@ -1,21 +1,17 @@
 import joblib
-import pandas
+import pandas as pd
 
+# Load the trained model
+model_filename = 'best_bernoulli_naive_bayes_model_1_2.pkl'
+best_nb = joblib.load(model_filename)
 
-# Load the trained model from the saved file
-model_filename = 'our_gaussian_naive_bayes_model.pkl'
-model = joblib.load(model_filename)
+# Load new data for prediction (replace 'new_data.csv' with your actual data file)
+new_data = pd.read_csv('new_data.csv')
+# Drop the '1/2' columns
+x_new = new_data.drop(['1/2'], axis=1)
 
-# Tuyiha home_odds, draw_odds, away_odds, home_wins, draw_no, away_wins
-new_data = pandas.DataFrame({
-    'home_odds': [2.8],
-    'draw_odds': [3.35],
-    'away_odds': [2.80],
-    'home_wins': [1],
-    'draws_no': [2],
-    'away_wins': [0],
-})
-
-prediction = model.predict(new_data)
-
-print(prediction)
+# Make predictions on the new data
+y_pred_new = best_nb.predict(x_new)
+# Print the predictions
+print("Predictions:")
+print(y_pred_new)

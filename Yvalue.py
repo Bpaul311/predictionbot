@@ -1,6 +1,6 @@
 import pandas as pd
 
-# Load your DataFrame from the CSV file (combined.srv in your case)
+# Load your DataFrame from the CSV file (combined_data.csv in your case)
 df = pd.read_csv('combined_data.csv')
 
 # Function to calculate 'game_id' based on the number of games played by each unique pair of teams
@@ -45,18 +45,31 @@ def determine_outcome(row):
 
 # Apply the determine_outcome function to each row and create a new 'outcome' column
 df['outcome'] = df.apply(determine_outcome, axis=1)
-# Save the updated DataFrame to a new CSV file
-df.to_csv('combined_data.csv', index=False)
+
+# Function to create a new column '1/2' based on 'outcome'
+
+
+def add_1_2_column(dataframe):
+    # Create a new column '1/2' and set it to 0 by default
+    dataframe['1/2'] = 0
+
+    # Where 'outcome' is not 'x' (1 or 2), set '1/2' column to 1
+    dataframe.loc[dataframe['outcome'] != 'x', '1/2'] = 1
+
+
+# Call the function to add the '1/2' column
+add_1_2_column(df)
 
 # Function to calculate statistics for each unique game combination
 
 
 def calculate_game_statistics(dataframe):
-   # Create new columns to store the statistics
+    # Create new columns to store the statistics
     dataframe['home_wins'] = 0
     dataframe['draws_no'] = 0
     dataframe['away_wins'] = 0
     dataframe['game_count'] = 0
+
     # Iterate through unique game combinations
     for index, game_row in dataframe.iterrows():
         home_team = game_row['Home_team']
@@ -86,6 +99,5 @@ def calculate_game_statistics(dataframe):
 # Calculate game statistics for your dataset
 game_statistics = calculate_game_statistics(df)
 
-
-# Save the game statistics to  the same CSV file
+# Save the updated DataFrame to a new CSV file
 df.to_csv('combined_data.csv', index=False)
